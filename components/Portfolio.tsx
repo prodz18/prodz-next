@@ -6,6 +6,7 @@ import { imageUrlFit } from '@/sanity/sanity.utils';
 import Image from 'next/image';
 import Modal from "./Modal";
 import { getImageDimensions } from '@sanity/asset-utils';
+import { cx } from "@/utils/helpers";
 
 interface PortfolioProps {
 	list: ProjectType[];
@@ -24,9 +25,14 @@ const PortfolioItem = ({ project } : { project: ProjectType }) => {
 	return (
 		<div className="bg-zinc-800 rounded-lg text-center overflow-hidden">
 			<Modal open={open} onOpenChange={setOpen}>
-          		<Modal.Button className="w-full h-auto m-0 p-0">
+          		<Modal.Button className={cx(
+					"w-full h-full m-0 p-0 cursor-pointer"
+				)}>
 					<Image
-						className="w-full"
+						className={cx(
+							"w-full h-full object-cover",
+							"hover:scale-105 ease-in-out duration-300 overflow-hidden"
+						)}
 						src={imgPreview}
 						width={500}
 						height={500}

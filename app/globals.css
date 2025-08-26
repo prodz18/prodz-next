@@ -1,48 +1,91 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+	--color-android: #3ddc84;
+	--color-ant-design: #0170fe;
+	--color-bitbucket: #0052cc;
+	--color-bootstrap: #7952b3;
+	--color-css: #1572b6;
+	--color-css-modules: #000000;
+	--color-docker: #2496ed;
+	--color-express: #000000;
+	--color-gcp: #4285f4;
+	--color-git: #f05032;
+	--color-github: #181717;
+	--color-graphql: #e10098;
+	--color-html: #e34f26;
+	--color-ios: #000000;
+	--color-javascript: #f7df1e;
+	--color-jira: #0052cc;
+	--color-less: #1d365d;
+	--color-material-design: #757575;
+	--color-mysql: #4479a1;
+	--color-next-js: #000000;
+	--color-node-js: #339933;
+	--color-php: #777bb4;
+	--color-postgresql: #4169e1;
+	--color-prisma: #2d3748;
+	--color-react: #61dafb;
+	--color-react-native: #61dafb;
+	--color-redux: #764abc;
+	--color-remix: #000000;
+	--color-sanity: #f03e2f;
+	--color-sass: #cc6699;
+	--color-sequelize: #52b0e7;
+	--color-shopify: #7ab55c;
+	--color-sketch: #f7b500;
+	--color-storybook: #ff4785;
+	--color-strapi: #2f2e8b;
+	--color-styled-component: #db7093;
+	--color-supabase: #3fcf8e;
+	--color-tailwindcss: #06b6d4;
+	--color-typescript: #3178c6;
+	--color-wordpress: #21759b;
+
+	@keyframes dialog-overlay-show {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes dialog-overlay-hide {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
+
+	@keyframes dialog-content-show {
+		from {
+			opacity: 0;
+			transform: scale(0.95);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	@keyframes dialog-content-hide {
+		from {
+			opacity: 1;
+			transform: scale(1);
+		}
+		to {
+			opacity: 0;
+			transform: scale(0.95);
+		}
+	}
+}
+
+@source inline("bg-{android,ant-design,bitbucket,bootstrap,css,css-modules,docker,express,gcp,git,github,graphql,html,ios,javascript,jira,less,material-design,mysql,next-js,node-js,php,postgresql,prisma,react,react-native,redux,remix,sanity,sass,sequelize,shopify,sketch,storybook,strapi,styled-components,supabase,tailwindcss,typescript,wordpress}");
 
 html {
     --scroll-behavior: smooth !important;
     scroll-behavior: smooth !important;
 }
-
-@keyframes dialog-overlay-show {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  @keyframes dialog-overlay-hide {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-  
-  @keyframes dialog-content-show {
-    from {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
-  
-  @keyframes dialog-content-hide {
-    from {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    to {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.95);
-    }
-  }

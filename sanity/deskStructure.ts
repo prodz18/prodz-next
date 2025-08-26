@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BiUser, BiBriefcase, BiTable } from 'react-icons/bi';
 
 export const structure = (S: any) => 

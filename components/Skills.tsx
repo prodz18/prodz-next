@@ -1,6 +1,7 @@
 'use client'
 import Logo from "./Logos";
 import type { SkillsType } from "@/types";
+import { cx } from "@/utils/helpers";
 
 interface SkillsProps {
 	list: SkillsType[];
@@ -24,7 +25,13 @@ const Skills = (props: SkillsProps) => {
 						className="inline-block rounded-full bg-zinc-800 p-2 mr-4 mb-4"
 					>
 						<div className="flex flex-row items-center justify-center">
-							<div className={`rounded-full bg-${item.title} w-8 h-8 inline-block mr-2`}>
+							<div 
+								className={cx(
+									"rounded-full",
+									item.title ? `bg-${item.title}` : '',
+									"w-8 h-8 inline-block mr-2"
+								)}
+							>
 								<div className="flex w-full h-full items-center justify-center">
 									<Logo name={item.title} />
 								</div>
