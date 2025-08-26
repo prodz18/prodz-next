@@ -10,9 +10,6 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
-	experimental: {
-		turbopackPersistentCaching: false,
-	},
 };
 
 export default nextConfig;
