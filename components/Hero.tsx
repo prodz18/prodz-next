@@ -62,7 +62,7 @@ const Hero = (props: HeroProps) => {
 					height={500}
 					title={profile.fullName}
 					alt={profile.fullName}
-					priority={true}
+					preload
 				/>
 			</div>
 		</section>
