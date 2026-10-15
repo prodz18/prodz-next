@@ -7,6 +7,28 @@ const profile = {
 	type: 'document',
 	icon: BiUser,
 	fields: [
+		defineField({ name: 'heroTitle', title: 'Hero title — first line', type: 'string', validation: rule => rule.max(70), initialValue: 'Thoughtful interfaces.' }),
+		defineField({ name: 'heroAccent', title: 'Hero title — blue line', type: 'string', validation: rule => rule.max(70), initialValue: 'Solid engineering.' }),
+		defineField({ name: 'heroIntro', title: 'Hero introduction', type: 'text', rows: 3, description: 'A short introduction. Falls back to Short Bio, then Bio.', validation: rule => rule.max(500) }),
+		defineField({ name: 'workIntro', title: 'Selected work introduction', type: 'string', initialValue: 'A few projects I’m proud to share.' }),
+		defineField({ name: 'featuredProject', title: 'Featured project', type: 'reference', to: [{ type: 'projects' }], options: { filter: 'visible == true' }, description: 'The large project above the grid. Hidden projects are not displayed.' }),
+		defineField({
+			name: 'selectedProjects', title: 'Selected projects', type: 'array',
+			description: 'Drag to reorder. Up to six projects below the featured one. Keep the featured project out of this list.',
+			of: [{ type: 'reference', to: [{ type: 'projects' }], options: { filter: 'visible == true' } }],
+			validation: rule => rule.max(6).unique().custom((value, context) => {
+				const featured = context.document?.featuredProject as { _ref?: string } | undefined;
+				return value?.some(item => (item as { _ref?: string })._ref === featured?._ref)
+					? 'The featured project is already shown above the grid.' : true;
+			}),
+		}),
+		defineField({ name: 'toolkitTitle', title: 'Toolkit heading', type: 'string', initialValue: 'Built with care.' }),
+		defineField({ name: 'toolkitIntro', title: 'Toolkit introduction', type: 'text', rows: 3 }),
+		defineField({ name: 'toolkitGroups', title: 'Toolkit rows', type: 'array', description: 'Drag to reorder the categories.', of: [{ type: 'object', name: 'toolkitGroup', fields: [
+			defineField({ name: 'title', title: 'Category', type: 'string', validation: rule => rule.required() }),
+			defineField({ name: 'items', title: 'Technologies', type: 'array', of: [{ type: 'string' }], options: { layout: 'tags' }, validation: rule => rule.required().min(1).unique() }),
+		], preview: { select: { title: 'title' } } }] }),
+		defineField({ name: 'contactTitle', title: 'Contact heading', type: 'text', rows: 2, description: 'Line breaks are preserved.', initialValue: 'Have something in mind?\nLet’s build it together.' }),
 		defineField({
 			name: 'fullName',
 			title: 'Full Name',
@@ -96,7 +118,7 @@ const profile = {
             name: 'skills',
             type: 'array',
             title: 'Skills',
-            description: 'This will appear in the Skills & Toolbet section',
+            description: 'Legacy skill references. The refreshed site uses Toolkit rows above.',
             of: [
                 {
                     type: 'reference',
