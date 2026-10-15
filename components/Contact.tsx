@@ -1,34 +1,11 @@
-'use client';
-
 import type { ProfileType } from '@/types';
-import { GrMail } from 'react-icons/gr';
 
-interface ContactProps {
-	profile: ProfileType;
-}
-
-const Contact = (props: ContactProps) => {
-	const { profile } = props;
-
+export default function Contact({ profile }: { profile: ProfileType }) {
 	return (
-		<section
-			id="contact"
-			className="flex flex-col items-center justify-center gap-x-12 mt-32 mb-8"
-		>
-			<div className="mb-6 text-center">
-				Have an exciting project or need help with something? Send me
-				over a message and lets chat.
-			</div>
-			<a
-				href={`mailto:${profile.email}`}
-				rel="noreferer noopener"
-				className="flex items-center rounded-full bg-sky-800 hover:bg-sky-600 border border-transparent hover:border-sky-500 py-2 px-4 gap-x-2 gap mb-5 duration-300"
-			>
-				<GrMail />
-				Send a Message
-			</a>
+		<section className="border-t border-site-line pt-[46px] pb-10" id="contact" aria-labelledby="contact-title">
+			<p className="mb-[22px] text-xs leading-normal tracking-[2px] text-site-blue uppercase">Let’s connect</p>
+			<h2 className="mb-[25px] font-display text-[clamp(30px,4.3vw,46px)] leading-[1.15] font-medium tracking-[-1px] whitespace-pre-line tablet:tracking-[-1.8px]" id="contact-title">{profile.contactTitle || 'Have something in mind?\nLet’s build it together.'}</h2>
+			{profile.email && <a className="border-b border-site-blue pb-[5px] text-[19px] wrap-anywhere text-site-blue" href={`mailto:${profile.email}`}>{profile.email} <span aria-hidden="true">↗</span></a>}
 		</section>
 	);
-};
-
-export default Contact;
+}

@@ -1,48 +1,17 @@
-'use client'
-import Logo from "./Logos";
-import type { SkillsType } from "@/types";
-import { cx } from "@/utils/helpers";
+import type { ProfileType } from '@/types';
 
-interface SkillsProps {
-	list: SkillsType[];
+const defaultGroups = [
+	{ _key: 'frontend', title: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
+	{ _key: 'backend', title: 'Backend', items: ['Node.js', 'GraphQL', 'PostgreSQL', 'Prisma'] },
+	{ _key: 'mobile', title: 'Mobile', items: ['React Native', 'iOS', 'Android'] },
+	{ _key: 'tools', title: 'Tools & content', items: ['Docker', 'Git', 'Sanity', 'Storybook'] },
+];
+
+export default function Skills({ profile }: { profile: ProfileType }) {
+	const groups = profile.toolkitGroups ?? defaultGroups;
+	return <section className="grid grid-cols-1 gap-[18px] border-t border-site-line pt-[46px] pb-10 desktop:grid-cols-[.8fr_1.2fr] desktop:gap-[45px]" id="skills" aria-labelledby="toolkit-title">
+		<div><p className="mb-[22px] text-xs leading-normal tracking-[2px] text-site-blue uppercase">The toolkit</p><h2 className="mb-[18px] font-display text-[32px] leading-[1.2] font-medium tracking-[-1px]" id="toolkit-title">{profile.toolkitTitle || 'Built with care.'}</h2>
+			<p className="max-w-[450px] text-base leading-[1.8] text-site-muted desktop:max-w-[320px]">{profile.toolkitIntro || 'From interfaces and APIs to mobile apps. Outside of code: family, games, and making music.'}</p></div>
+		<div>{groups.map(group => <div className="grid grid-cols-1 gap-[6px] border-b border-site-line py-[15px] text-base leading-[1.65] last:border-b-0 tablet:grid-cols-[140px_1fr] tablet:gap-5" key={group._key}><strong className="font-medium">{group.title}</strong><span className="text-site-muted">{group.items?.join(' · ')}</span></div>)}</div>
+	</section>;
 }
-
-const Skills = (props: SkillsProps) => {
-
-	const { list } = props;
-	
-	return (
-		<section id="skills" className="flex flex-col lg:mt-32 mt-20 mb-16">
-			<div className="flex-1">
-				<h1 className="text-2xl font-bold tracking-tight mb-4 leading-[3.7rem] lg:min-w-[700px] min-w-full uppercase text-center lg:text-left">
-					Skills & Toolset
-				</h1>
-			</div>
-			<div className="flex-1">
-				{list.map((item, index) => (
-					<div
-						key={`skill-${index}`}
-						className="inline-block rounded-full bg-zinc-800 p-2 mr-4 mb-4"
-					>
-						<div className="flex flex-row items-center justify-center">
-							<div 
-								className={cx(
-									"rounded-full",
-									item.title ? `bg-${item.title}` : '',
-									"w-8 h-8 inline-block mr-2"
-								)}
-							>
-								<div className="flex w-full h-full items-center justify-center">
-									<Logo name={item.title} />
-								</div>
-							</div>
-							<span className="pr-2 uppercase text-xs">{item.title.replace('-'," ")}</span>
-						</div>
-					</div>
-				))}
-			</div>
-		</section>
-	);
-};
-
-export default Skills;

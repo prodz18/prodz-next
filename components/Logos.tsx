@@ -3,7 +3,7 @@ import {
     SiAntdesign,
     SiBitbucket,
     SiBootstrap,
-    SiCss3,
+    SiCss,
     SiCssmodules,
     SiDocker,
     SiExpress,
@@ -59,7 +59,7 @@ const Logo = (props: LogosProps) => {
         case 'bootstrap':
             return <SiBootstrap />;
         case 'css':
-            return <SiCss3 />;
+            return <SiCss />;
         case 'css-modules':
             return <SiCssmodules />;
         case 'docker':

@@ -1,72 +1,27 @@
 import Image from 'next/image';
 import type { ProfileType } from '@/types';
-import { GrMail, GrGithub, GrLinkedin } from 'react-icons/gr';
 import { imageUrlFit } from '@/sanity/sanity.utils';
 
-interface HeroProps {
-	profile: ProfileType;
-}
-
-const Hero = (props: HeroProps) => {
-	const { profile } = props;
-	const avatarImage = imageUrlFit(profile.profileImage, 500, 500);
-
-	const getLogo = (name: string) => {
-		switch(name){
-			case 'email':
-				return <GrMail />;
-			case 'github':
-				return <GrGithub />;
-			case 'linkedin':
-				return <GrLinkedin />;
-			default:
-				return null;
-		}
-	}
-
+export default function Hero({ profile }: { profile: ProfileType }) {
 	return (
-		<section
-			id="hero"
-			className="flex lg:flex-row flex-col-reverse items-start lg:justify-center justify-between gap-x-4 mt-20 mb-16"
-		>
-			<div className="w-full lg:max-w-2xl">
-				<h1 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6 lg:leading-[3.7rem] leading-tight lg:min-w-[700px] min-w-full uppercase text-center lg:text-left">
-					{profile.headline}
+		<section className="grid grid-cols-1 items-center gap-[30px] pt-[38px] pb-[50px] tablet:grid-cols-[1.4fr_1fr] tablet:gap-[22px] tablet:pt-[50px] desktop:grid-cols-[1.65fr_1fr] desktop:gap-11 desktop:pt-20 desktop:pb-[74px]" id="hero">
+			<div>
+				<p className="mb-[22px] text-xs leading-normal tracking-[2px] text-site-blue uppercase">{profile.fullName} / {profile.headline}</p>
+				<h1 className="mb-6 font-display text-[clamp(32px,8.2vw,39px)] leading-[1.09] font-medium tracking-[-1.7px] tablet:text-[38px] desktop:text-[clamp(36px,5.3vw,57px)] desktop:tracking-[-2.5px]">
+					{profile.heroTitle || 'Thoughtful interfaces.'}<br /><span className="text-site-blue">{profile.heroAccent || 'Solid engineering.'}</span>
 				</h1>
-				<p className="text-base text-zinc-400 leading-relaxed">
-					{profile.bio}
-				</p>
-				<ul className="flex items-center justify-center lg:justify-start gap-x-3 lg:gap-x-6 my-10">
-					{Object.entries(profile.socialLinks)
-						.sort()
-						.map(([key, value], id) => (
-							<li key={id}>
-								<a
-									href={value}
-									rel="noreferer noopener"
-									className="flex items-center rounded-full bg-zinc-800 border border-transparent hover:border-zinc-700 py-2 px-4 gap-x-2 gap mb-5 hover:text-sky-400 duration-300"
-								>
-									{getLogo(key)}
-									{key[0].toUpperCase() + key.toLowerCase().slice(1)}
-								</a>
-							</li>
-						))
-					}
-				</ul>
+				<p className="mb-[26px] max-w-[480px] text-sm leading-[1.75] text-site-muted desktop:text-base">{profile.heroIntro || profile.shortBio || profile.bio}</p>
+				<div className="flex flex-wrap items-center gap-[22px]">
+					<a className="w-full rounded bg-site-blue px-[19px] py-[13px] text-center text-base font-semibold text-site-bg hover:text-site-bg hover:brightness-[1.08] tablet:w-auto" href="#portfolio">Explore selected work <span aria-hidden="true">↓</span></a>
+					<a className="w-full border-b-0 border-site-line py-3 text-center text-base tablet:w-auto tablet:border-b" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+				</div>
 			</div>
-			<div className="w-full mb-8 lg:mb-0">
-				<Image
-					className="rounded-full w-full max-w-[220px] lg:max-w-[350px] mx-auto"
-					src={avatarImage}
-					width={500}
-					height={500}
-					title={profile.fullName}
-					alt={profile.fullName}
-					priority={true}
-				/>
-			</div>
+			{profile.profileImage?.asset && (
+				<figure className="row-start-1 text-center tablet:row-auto">
+					<Image className="mx-auto block aspect-square h-auto w-full max-w-[210px] rounded-full object-cover tablet:max-w-[290px]" src={imageUrlFit(profile.profileImage, 600, 600)} alt={profile.profileImage.alt || profile.fullName} width={600} height={600} sizes="(max-width: 520px) 210px, 290px" preload />
+					{profile.location && <figcaption className="mt-[18px] text-xs leading-normal tracking-[.5px] text-site-muted"><span className="text-site-blue">Based in</span> {profile.location}</figcaption>}
+				</figure>
+			)}
 		</section>
 	);
-};
-
-export default Hero;
+}

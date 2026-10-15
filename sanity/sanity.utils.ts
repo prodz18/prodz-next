@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import imageUrlBuilder from '@sanity/image-url';
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url';
 import client from "@/sanity/sanity.client";
 
-export const imageBuilder = imageUrlBuilder(client);
+export const imageBuilder = createImageUrlBuilder(client);
 
-export const imageUrl = (source: any, width = 600) => {
+export const imageUrl = (source: SanityImageSource, width = 600) => {
     return imageBuilder.image(source).width(width).url();
 };
 
-export const imageUrlFit = (source: any, width: number, height: number) => {
+export const imageUrlFit = (source: SanityImageSource, width: number, height: number) => {
     return imageBuilder.image(source).width(width).height(height).crop('top').fit('crop').url();
 };
 
-export const imageMax = (source: any) => {
+export const imageMax = (source: SanityImageSource) => {
     return imageBuilder.image(source).fit('max').url();
 };

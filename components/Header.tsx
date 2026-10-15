@@ -1,47 +1,16 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import Logo from '@/assets/logo.png';
-
-const Header = () => {
-
-	const links = [
-		{
-			title: 'Skills',
-			link: '#skills',
-		},
-		{
-			title: 'Portfolio',
-			link: '#portfolio',
-		},
-		{
-			title: 'Contact',
-			link: '#contact',
-		}
-	]
+export default function Header() {
+	const linkClass = 'pointer-coarse:inline-flex pointer-coarse:min-h-11 pointer-coarse:items-center';
 
 	return (
-		<header className="py-6 md:px-16 px-6 border-b border-zinc-800 z-30 md:mb-28 mb-20">
-			<div className="max-w-6xl mx-auto flex items-center justify-between">
-				<Link href="/">
-					<Image src={Logo} width={25} alt="logo" />
-				</Link>
-				<nav>
-					<ul className="flex items-center gap-x-8">
-						{links.map((item, index) => (
-							<li key={`menu-${index}`}>
-								<Link
-									href={item.link}
-									className="hover:text-sky-400 duration-300 uppercase text-sm"
-								>
-									{item.title}
-								</Link>
-							</li>
-						))}
-					</ul>
-				</nav>
-			</div>
+		<header className="relative mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-[18px] px-[22px] py-7 after:absolute after:inset-x-[22px] after:bottom-0 after:h-px after:bg-site-line after:content-[''] tablet:flex-nowrap tablet:gap-7 tablet:px-[27px] tablet:after:inset-x-[27px] desktop:px-[54px] desktop:after:inset-x-[54px]">
+			<a className={`font-display text-[21px] leading-[normal] font-medium tracking-[-1px] tablet:text-[23px] ${linkClass}`} href="#hero" aria-label="prodz.dev home">
+				prodz<span className="text-site-blue">.</span>dev
+			</a>
+			<nav className="flex gap-[18px] text-sm leading-normal text-site-muted tablet:gap-[25px]" aria-label="Main navigation">
+				<a className={linkClass} href="#portfolio">Work</a>
+				<a className={linkClass} href="#skills">About</a>
+				<a className={linkClass} href="#contact">Contact</a>
+			</nav>
 		</header>
 	);
 }
-
-export default Header;

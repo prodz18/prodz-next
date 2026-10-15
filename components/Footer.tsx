@@ -1,13 +1,19 @@
-const Footer = () => {
+import type { ProfileType } from '@/types';
+import { safeWebURL } from '@/utils/portfolio';
+
+export default function Footer({ profile }: { profile: ProfileType }) {
+	const github = safeWebURL(profile.socialLinks?.github);
+	const linkedin = safeWebURL(profile.socialLinks?.linkedin);
+	const linkClass = 'pointer-coarse:inline-flex pointer-coarse:min-h-11 pointer-coarse:items-center';
+
 	return (
-		<footer className="border-t border-zinc-800 mt-20">
-			<div className="max-w-7xl mx-auto flex lg:flex-row flex-col items-center lg:justify-between justify-center gap-y-4 md:px-16 px-6 py-16 text-zinc-400">
-				<small className="duration-200 font-mono mx-auto uppercase">
-					© {new Date().getFullYear()} PRODZ.DEV. All rights reserved.
-				</small>
+		<footer className="flex flex-wrap justify-between gap-5 pt-8 pb-[26px] text-sm leading-normal text-site-muted">
+			<span>© {new Date().getFullYear()} {profile.fullName}</span>
+			<div className="flex flex-wrap gap-5">
+				{github && <a className={linkClass} href={github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}
+				{linkedin && <a className={linkClass} href={linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>}
+				<a className={linkClass} href="#hero">Back to top ↑</a>
 			</div>
 		</footer>
 	);
 }
-
-export default Footer;
