@@ -93,3 +93,11 @@ same network. `next.config.ts` explicitly permits that LAN hostname and `127.0.0
 in `allowedDevOrigins`. Next.js otherwise blocks dev resources for those origins,
 which can leave server-rendered pages visible but their interactive controls inactive.
 If the machine's LAN IP changes, update that entry and restart `npm run dev`.
+
+### Styling conventions
+
+Use Tailwind utilities for component layout, typography, responsive behavior, and
+interaction states. Shared colors, font aliases, and the existing 521px/721px
+breakpoints live in `app/globals.css` as Tailwind theme values. Keep custom CSS for
+shared base behavior or cases utilities cannot express clearly; the `portfolio-site`
+selector scopes interaction defaults away from Sanity Studio.

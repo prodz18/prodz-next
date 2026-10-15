@@ -17,8 +17,8 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={`portfolio-site ${bodyFont.variable} ${headingFont.variable}`}>
-				<a className="skip-link" href="#main-content">Skip to content</a>
+			<body className={`portfolio-site bg-site-bg font-sans text-site-text scheme-dark ${bodyFont.variable} ${headingFont.variable}`}>
+				<a className="absolute -top-[100px] left-5 z-100 bg-site-surface p-3 focus:top-3" href="#main-content">Skip to content</a>
 				<Header />
 				{children}
 			</body>

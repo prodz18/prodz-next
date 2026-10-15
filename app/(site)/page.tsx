@@ -45,7 +45,7 @@ const Home = async () => {
 	const work = selectWork(profile, projects || []);
 
 	return (
-		<main className="site-container" id="main-content">
+		<main className="mx-auto max-w-[1180px] px-[22px] tablet:px-[27px] desktop:px-[54px]" id="main-content">
 			<Hero profile={profile} />
 
 			<Portfolio featured={work.featured} selected={work.selected} intro={profile.workIntro} />
